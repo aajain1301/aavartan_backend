@@ -15,11 +15,25 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from rest_framework_swagger.views import get_swagger_view
+from django.views.generic import TemplateView
+from rest_framework.schemas import get_schema_view
+
+schema_view = get_swagger_view(title='Pastebin API')
 
 urlpatterns = [
     path('', include('django.contrib.auth.urls')),
     path('admin/', admin.site.urls),
     path('events/', include('Events.urls')),
-    path('user/', include('registration.urls'))
+    path('user/', include('registration.urls')),
+    # path('docs', schema_view),
+    path('swagger-ui/', TemplateView.as_view(
+        template_name='swagger-ui.html',
+        extra_context={'schema_url':'openapi-schema'}
+    ), name='swagger-ui'),
+    path('openapi', get_schema_view(
+    title="Your Project",
+    description="API for all things …"
+    ), name='openapi-schema'),
 
 ]
