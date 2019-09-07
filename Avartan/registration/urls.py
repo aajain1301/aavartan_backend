@@ -21,6 +21,7 @@ urlpatterns = [
     path('verify/', views.OTPView.as_view()),
     path('register/', views.EventRegView.as_view()),
     path('list/',views.EventListView.as_view()),
+    path('list/', views.UserFile.as_view()),
 
 
 ]
