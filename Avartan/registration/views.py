@@ -66,3 +66,12 @@ class EventListView(generics.ListAPIView):
             for i in queryset:
                 d['events'].append(i.id)
         return Response(d)
+    
+class UserFile(APIView):
+    def get(self,request):
+        user = [i for i in User.objects.all()]
+        l = []
+        for i in user:
+            l.append(i.name)
+        print(l)
+        return Response({})
